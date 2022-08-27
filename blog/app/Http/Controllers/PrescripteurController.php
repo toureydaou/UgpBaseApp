@@ -108,6 +108,7 @@ class PrescripteurController extends Controller
     public function show(Prescripteur $prescripteur)
     {
         //
+        return view('prescripteurs.show')->with('prescripteur', $prescripteur);
     }
 
     /**
