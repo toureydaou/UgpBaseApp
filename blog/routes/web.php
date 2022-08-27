@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::view('/test', 'prescripteurs.show');
+
+
 Route::get('/', function () {
     if (Auth::guest()) {
         return view('auth.login');
@@ -32,7 +36,7 @@ Route::get('/home/creation-prescripteur', [PrescripteurController::class, 'creat
 
 Route::post('/home/creation-prescripteur', [PrescripteurController::class, 'store'])->name('enregistrementPrescripteur');
 
-
+Route::get('/home/prescripteur{prescripteur}', [PrescripteurController::class, 'show'])->name('prescripteur');
 
 Auth::routes();
 
