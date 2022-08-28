@@ -44,14 +44,14 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right p-1" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item p-2" href="{{ route('creationPrescripteur') }}">
-                                    {{__('Création d \'un prescripteur')}}
+                                <a class="dropdown-item p-2" href="{{ route('inscription') }}">
+                                    {{__('Inscription d \'un prescripteur')}}
                                 </a>
-                                
+
                                 <a class="dropdown-item p-2" href="{{ route('prescripteurs.index') }}">
                                     {{__('Liste des prescripteurs')}}
                                 </a>
-                               
+
                             </div>
                         </li>
 

@@ -2,13 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConnectionCode;
 use App\Models\Prescripteur;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class PrescripteurController extends Controller
 {
+    public function showInscription(){
+        return view('prescripteurs.inscription');
+    }
+
+    public function inscription(Request $request){
+        $code = generateString(6);
+        User::create([
+            'email' => $request->email,
+            'profil' => $request->profil,
+            'password' => $code
+        ]);
+        Mail::to($request->email)->send(new ConnectionCode($code));
+        return redirect()->route('inscription');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +33,7 @@ class PrescripteurController extends Controller
      */
     public function index()
     {
-        //
         $prescripteurs = Prescripteur::all();
-
         return view('prescripteurs.index')->with('prescripteurs', $prescripteurs);
     }
 
@@ -87,8 +102,8 @@ class PrescripteurController extends Controller
 
         $prescripteur = Prescripteur::where('telephone', $request->telephone)->first();
 
-        
-        
+
+
         // Création de l'utilisateur et enregistrement en base
 
         User::create([

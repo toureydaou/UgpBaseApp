@@ -46,7 +46,7 @@
                             </select>
                         </div>
                     </div>
-                        
+
                     <div class="row justify-content-between mb-5">
                         <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -148,7 +148,7 @@
 
                     <div class="row justify-content-between mt-3 mb-5">
                         <div class="col-xxl-5 col-lg-4 col-md-6 col-sm-12">
-                            <label class="mb-2">Photo du prescripteur</label> 
+                            <label class="mb-2">Photo du prescripteur</label>
                             <input type="file" value="{{ old('avatar') }}" name="avatar" accept=".jpg, .jpeg, .png" onchange="previewPicture(this)"/>
                             <p>Format acceptés : .jpg, .jpeg, .png</p>
                             @error('image')
@@ -161,11 +161,11 @@
                             <img src="#" alt="" id="image" class="img-thumbnail float-end" style="max-width: 200px;"/>
                         </div>
                     </div>
-                    
+
                     <div class="row justify-content-center mt-3 mb-5">
                         <div class="col-xxl-4 col-lg-3 col-md-4 col-sm-12">
                             <label for="exampleInputEmail1" class="form-label">Code de connexion</label>
-                            <input type="text" value={{$code}} class="form-control text-black-100 fw-bold bg-secondary bg-opacity-50" name="code" readonly id="" required>
+                            <input type="text" value="{{$code}}" class="form-control text-black-100 fw-bold bg-secondary bg-opacity-50" name="code" readonly id="" required>
                         </div>
                     </div>
                 </div>

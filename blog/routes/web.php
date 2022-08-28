@@ -39,6 +39,10 @@ Route::get('/home/prescripteur{prescripteur}', [PrescripteurController::class, '
 
 Route::get('/home/liste-prescripteurs', [PrescripteurController::class, 'index'])->name('prescripteurs.index');
 
+Route::post('/home/inscription', [PrescripteurController::class, 'inscription'])->name('inscrirePrescripteur');
+
+Route::get('/home/inscription', [PrescripteurController::class, 'showInscription'])->name('inscription');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
