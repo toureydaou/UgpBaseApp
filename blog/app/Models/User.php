@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
 
     public function prescripteur(){
-        return $this->hasOne(Prescripteur::class);
+        return $this->hasOne(Prescripteur::class, 'numPrescripteur');
     }
 }

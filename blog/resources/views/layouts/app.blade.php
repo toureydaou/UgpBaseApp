@@ -15,9 +15,12 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script type="text/javascript" src="{{asset('DataTables/datatables.js')}}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.css')}}"/>
+
 </head>
 <body>
     <div id="app">
@@ -45,7 +48,7 @@
                                     {{__('Création d \'un prescripteur')}}
                                 </a>
                                 
-                                <a class="dropdown-item p-2" href="{{ route('logout') }}">
+                                <a class="dropdown-item p-2" href="{{ route('prescripteurs.index') }}">
                                     {{__('Liste des prescripteurs')}}
                                 </a>
                                
