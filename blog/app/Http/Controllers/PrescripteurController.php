@@ -17,6 +17,9 @@ class PrescripteurController extends Controller
     public function index()
     {
         //
+        $prescripteurs = Prescripteur::all();
+
+        return view('prescripteurs.index')->with('prescripteurs', $prescripteurs);
     }
 
     /**
@@ -96,7 +99,7 @@ class PrescripteurController extends Controller
             'numPrescripteur' => $prescripteur['id']
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('prescripteurs.index');
     }
 
     /**
