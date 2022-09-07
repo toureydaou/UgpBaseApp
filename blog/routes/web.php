@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PrescripteurController;
+use App\Http\Controllers\SiteController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,9 @@ Route::get('/home/prescripteur{prescripteur}', [PrescripteurController::class, '
 
 Route::get('/home/liste-prescripteurs', [PrescripteurController::class, 'index'])->name('prescripteurs.index');
 
+Route::post('/home/liste-prescripteurs{prescripteur}', [PrescripteurController::class, 'destroy'])->name('prescripteur.destroy');
+
+
 Route::post('/home/inscription', [PrescripteurController::class, 'inscription'])->name('inscrirePrescripteur');
 
 Route::get('/home/inscription', [PrescripteurController::class, 'showInscription'])->name('inscription');
@@ -46,3 +50,14 @@ Route::get('/home/inscription', [PrescripteurController::class, 'showInscription
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// Routes de gestion des sites
+
+Route::get('file-import-export', [SiteController::class, 'fileImportExport'])->name('file-import-export');
+
+Route::post('file-import', [SiteController::class, 'fileImport'])->name('file-import');
+
+Route::get('creation-site', [SiteController::class, 'create'])->name('site.create');
+
+Route::get('liste-des-sites', [SiteController::class, 'index'])->name('site.index');

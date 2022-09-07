@@ -54,16 +54,51 @@
 
                             </div>
                         </li>
+                    </ul>
+
+
+                    <ul class="navbar-nav ms-5">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{__('Gestion des sites')}}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right p-1" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item p-2" href="{{ route('site.create') }}">
+                                    {{__('Création d\'un site')}}
+                                </a>
+
+                                <a class="dropdown-item p-2" href="{{ route('site.index') }}">
+                                    {{__('Liste des sites')}}
+                                </a>
+
+                            </div>
+                        </li>
 
                     </ul>
                     @endif
                     @endauth
 
+
+                    @auth
+                    @if(Auth::user()->profil === 'Prescripteur' || Auth::user()->profil === 'Admin')
+                    <ul class="navbar-nav ms-5">
+                        <li class="nav-item">
+                            <a id="navbarDropdown" class="nav-link" href="{{ route('creationPrescripteur')}}">
+                                {{__("Mes informations")}}
+                            </a>
+                        </li>
+
+                    </ul>
+                    @endif
+                    @endauth
+
+
                     @auth
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->email }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -86,6 +121,8 @@
         </nav>
 
         <main class="py-4">
+            @include('flash-messages.templates')
+
             @yield('content')
         </main>
     </div>

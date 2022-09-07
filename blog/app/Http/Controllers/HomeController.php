@@ -22,7 +22,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $nbreTotal = nbrePrescripteurs();
+        $nbreActifs = nbrePrescripteursActifs();
+        $nbreInactifs = nbrePrescripteursInactifs();
+
+        return view('home')->with([
+            'nbreTotal' => $nbreTotal,
+            'nbreActifs' => $nbreActifs,
+            'nbreInactifs' => $nbreInactifs
+        ]);
     }
 }

@@ -18,11 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'profil',
-        'numPrescripteur',
     ];
 
     /**
@@ -45,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function prescripteur(){
-        return $this->hasOne(Prescripteur::class, 'numPrescripteur');
+        return $this->belongsTo(Prescripteur::class);
     }
 }
