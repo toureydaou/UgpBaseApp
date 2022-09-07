@@ -18,11 +18,15 @@ class UserSeeder extends Seeder
         //
 
         User::create([
-            'name' => 'toto',
             'email' => 'toto@gmail.com',
             'profil' => 'Admin',
             'password' => Hash::make('12345678'),
-            'numPrescripteur' => 1
+        ]);
+
+        User::create([
+            'email' => 'john@gmail.com',
+            'profil' => 'Prescription',
+            'password' => Hash::make('12345678'),
         ]);
     }
 }

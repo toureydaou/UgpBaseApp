@@ -25,11 +25,24 @@ class PrescripteurSeeder extends Seeder
             'email' => 'toto@gmail.com',
             'dateDebut' => '24/08/2022',
             'dateFin' => '30/11/2023',
-            'site' => 'tambalo',
+            'numSite' => 1,
             'actif' => true,
-            'formation' => 'Géomètre',
-            'code' => 'ki57yh',
-            'avatar' => 'profils/malikpernon.png'
+            'avatar' => 'profils/malikpernon.png',
+            'numUser' => 1
+        ]);
+
+        Prescripteur::create([
+            'nom' => 'JHON',
+            'prenom' => 'Rachid',
+            'sexe' => 'Mr',
+            'adresse' => 'Sokodé',
+            'telephone' => '90258471',
+            'email' => 'john@gmail.com',
+            'dateDebut' => '24/08/2022',
+            'numSite' => 2,
+            'actif' => true,
+            'avatar' => 'profils/malikpernon.png',
+            'numUser' => 2
         ]);
     }
 }

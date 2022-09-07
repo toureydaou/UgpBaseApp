@@ -10,14 +10,18 @@ class Prescripteur extends Model
 {
     use HasFactory;
     
-    protected $primary = 'id';
+    protected $primaryKey = 'id';
     protected $fillable = ['nom', 'prenom', 'sexe', 'telephone',  
                             'adresse', 'email', 'dateDebut', 
-                            'dateFin', 'site', 'actif', 
-                            'formation', 'profil', 'code', 'avatar'];
+                            'dateFin', 'numSite', 'actif', 'avatar', 'numUser'
+                            ];
     
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'numUser');
+    }
+
+    public function site() {
+        return $this->belongsTo(Site::class, 'numSite');
     }
 }

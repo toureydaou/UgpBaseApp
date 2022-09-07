@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\District;
 use App\Models\Prescripteur;
+use App\Models\Site;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,8 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            //RegionSeeder::class,
+           // DistrictSeeder::class,
+            UserSeeder::class,
             PrescripteurSeeder::class,
-            UserSeeder::class
         ]);
     }
 }

@@ -2,17 +2,18 @@
 
 @section('content')
 
-    <div class="container shadow-sm p-0 mt-5">
+    <div class="container shadow-lg col-6 p-0 mt-5">
         <div class="row m-0">
-            <div class="card bg-secondary bg-opacity-10  p-0">
+            <div class="card p-0">
                 <div class="card-header text-center h4 p-3">
                     Inscription d'un prescripteur
                 </div>
                 <form action="{{route('inscrirePrescripteur')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="row justify-content-between mb-5">
-                            <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="row justify-content-center mb-5">
+
+                            <div class="col-xxl-8 col-lg-8 col-md-8 col-sm-12">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
                                 <div class="input-group">
                                     <div class="input-group-text">@</div>
@@ -24,7 +25,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-xxl-2 col-lg-2 col-md-2 col-sm-12">
+
+                            <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
                                 <label for="exampleInputEmail1" class="form-label">Rôle</label>
                                 <select class="form-select" name="profil" aria-label="Default select example" required>
                                     <option value="Admin">Administrateur</option>

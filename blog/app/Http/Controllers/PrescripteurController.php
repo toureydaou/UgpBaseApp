@@ -4,26 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Mail\ConnectionCode;
 use App\Models\Prescripteur;
+use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class PrescripteurController extends Controller
 {
     public function showInscription(){
+
+        // affichage du formulaire d'ajout d'un utilisateur
+
         return view('prescripteurs.inscription');
     }
 
     public function inscription(Request $request){
+
+        // validation du formulaire
+
+        $request->validate([
+            'email' => 'bail|required|email',
+        ]);
+
+
+        // génération du code et envoi du mail
+
         $code = generateString(6);
+
+        // creation de l'utilisateur
         User::create([
             'email' => $request->email,
             'profil' => $request->profil,
-            'password' => $code
+            'password' => Hash::make($code)
         ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        Prescripteur::create([
+            'email' => $request->email,
+            'actif' => true,
+            'numUser' => $user->id
+        ]);
+        
+
+        // envoi du mail
         Mail::to($request->email)->send(new ConnectionCode($code));
-        return redirect()->route('inscription');
+
+        // redirection vers la page d'ajout d'utilisateur
+        return redirect()->route('inscription')->with('success', 'Email envoyé avec succès !');
     }
 
     /**
@@ -34,7 +64,8 @@ class PrescripteurController extends Controller
     public function index()
     {
         $prescripteurs = Prescripteur::all();
-        return view('prescripteurs.index')->with('prescripteurs', $prescripteurs);
+        
+        return view('prescripteurs.index')->with(['prescripteurs' => $prescripteurs]);
     }
 
     /**
@@ -44,8 +75,17 @@ class PrescripteurController extends Controller
      */
     public function create()
     {
-        $code = generateString(6);
-        return view('prescripteurs.create')->with('code', $code);
+        $sites = Site::all();
+        $prescripteur = Prescripteur::where('numUser', Auth::user()->id)->first();
+        
+        
+        
+
+        return view('prescripteurs.create')
+                ->with([
+                        'sites' => $sites->sortBy('nom'),
+                        'prescripteur' => $prescripteur
+                    ]);
     }
 
     /**
@@ -61,60 +101,47 @@ class PrescripteurController extends Controller
         $request->validate([
             'nom' => 'bail|required|string|min:3',
             'prenom' => 'bail|required|string|min:3',
-            'email' => 'bail|required|email',
-            'dateDebut' => 'bail|required|date|before:dateFin',
-            'dateFin' => 'bail|required|date|after:dateDebut',
+            'dateDebut' => 'bail|required|date',
             'avatar' => 'bail|file|image|max:700',
-            'formation' => 'bail|string',
-            'adresse' => 'string|min:5'
+            'adresse' => 'string|min:3'
         ]);
 
 
-        // Enregistrement de la photo
+        // Enregistrement de la photo (si fournie)
 
-        $image = $request->file('avatar');
-        $request['avatar'] = $image->storeAs('profils', $request->nom . $request->prenom . '.' . $image->extension()) ;
+        if ($request->file != null) {
+            $image = $request->file('avatar');
+            $request['avatar'] = $image->storeAs('profils', $request->nom . $request->prenom . '.' . $image->extension());
+        }
 
+        //ddd($request->avatar);
 
-        // Hashage du code de connexion
+        // Récupération de l'id du prescripteur via son email
 
-        $request['code'] = Hash::make($request->code);
+        $prescripteur = Prescripteur::where('email', Auth::user()->email)->first();
 
-        // Enregistrement du prescripteur en base
-
-        Prescripteur::create([
+        $prescripteur->update([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'sexe' => $request->sexe,
             'adresse' => $request->adresse,
             'telephone' => $request->telephone,
-            'email' => $request->email,
             'dateDebut' => $request->dateDebut,
-            'dateFin' => $request->dateFin,
-            'site' => $request->site,
-            'actif' => $request->actif,
-            'formation' => $request->formation,
-            'code' => $request->code,
+            'numSite' => $request->numSite,
             'avatar' => $request->avatar
         ]);
-
-        // Récupération du prescripteur pour son id
-
-        $prescripteur = Prescripteur::where('telephone', $request->telephone)->first();
 
 
 
         // Création de l'utilisateur et enregistrement en base
 
-        User::create([
-            'name' => $request->nom,
-            'email' => $request->email,
-            'password' => $request->code,
-            'profil' => $request->profil,
+        $user=User::where('email', Auth::user()->email)->first();
+        
+        $user->update([
             'numPrescripteur' => $prescripteur['id']
         ]);
 
-        return redirect()->route('prescripteurs.index');
+        return redirect()->route('home')->with('success', 'Informations modifiées avec succès !');
     }
 
     /**
@@ -158,8 +185,27 @@ class PrescripteurController extends Controller
      * @param  \App\Models\Prescripteur  $prescripteur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prescripteur $prescripteur)
+    public function destroy(Prescripteur $prescripteur, Request $request)
     {
         //
+        if ($request->activation === "true") {
+            $prescripteur->update([
+                'actif' => true,
+                'dateFin' => null
+            ]);
+            $prescripteur->save();
+
+        } else {
+            $prescripteur->update([
+                'actif' => false,
+                'dateFin' => date('d-m-Y')
+            ]);
+            $prescripteur->save();
+        }
+        
+
+        
+
+        return redirect()->route('prescripteurs.index');
     }
 }
