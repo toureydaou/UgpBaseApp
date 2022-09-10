@@ -18,12 +18,12 @@
                                 <div class="input-group">
                                     <div class="input-group-text">@</div>
                                     <input type="text" class="form-control" name="email" id="" placeholder="exemple@xxxx.com" value="{{ old('email') }}" required>
-                                    @error('email')
+                                </div>
+                                @error('email')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @endif
-                                </div>
+                                @endif
                             </div>
 
                             <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">

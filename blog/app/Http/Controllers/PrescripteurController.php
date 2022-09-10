@@ -31,7 +31,7 @@ class PrescripteurController extends Controller
         // validation du formulaire
 
         $request->validate([
-            'email' => 'bail|required|email',
+            'email' => 'bail|required|email|unique:users'
         ]);
 
 
@@ -108,7 +108,7 @@ class PrescripteurController extends Controller
             'nom' => 'bail|required|string|min:3',
             'prenom' => 'bail|required|string|min:3',
             'dateDebut' => 'bail|required|date',
-            'avatar' => 'bail|file|image|max:700',
+            'avatar' => 'bail|file|image|max:5120',
             'adresse' => 'string|min:3'
         ]);
 
@@ -195,6 +195,9 @@ class PrescripteurController extends Controller
     public function destroy(Prescripteur $prescripteur, Request $request)
     {
         //
+        
+
+
         if ($request->activation === "true") {
             $prescripteur->update([
                 'actif' => true,
