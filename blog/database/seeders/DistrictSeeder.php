@@ -76,7 +76,7 @@ class DistrictSeeder extends Seeder
 
         District::create([
             'nom' => 'Kozah',
-            'numRegion' => 4
+            'numRegion' => 5
         ]);
 
         District::create([

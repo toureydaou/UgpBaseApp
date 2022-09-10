@@ -5,7 +5,7 @@
     
 <div class="container mt-5 col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-12 p-0">
     <div class="card shadow-lg mb-3">
-        <img src="{{asset($prescripteur->avatar)}}" class="card-img-top" alt="photo de profil" style="height: 300px">
+        <img src="{{asset('storage/' . $prescripteur->avatar)}}" class="card-img-top" alt="photo de profil" style="height: 300px">
         <div class="card-body">
 
             <div class="row text-center mb-4 mt-2">

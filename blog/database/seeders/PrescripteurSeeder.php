@@ -17,12 +17,12 @@ class PrescripteurSeeder extends Seeder
         //
 
         Prescripteur::create([
-            'nom' => 'toto',
-            'prenom' => 'toto',
+            'nom' => 'KANGA',
+            'prenom' => 'Claude',
             'sexe' => 'Mr',
             'adresse' => 'Sokodé',
             'telephone' => '90664587',
-            'email' => 'toto@gmail.com',
+            'email' => 'admin@gmail.com',
             'dateDebut' => '24/08/2022',
             'dateFin' => '30/11/2023',
             'numSite' => 1,

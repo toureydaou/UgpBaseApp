@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             //RegionSeeder::class,
-           // DistrictSeeder::class,
+            //DistrictSeeder::class,
             UserSeeder::class,
             PrescripteurSeeder::class,
         ]);

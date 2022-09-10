@@ -19,6 +19,7 @@ class SiteController extends Controller
     public function index()
     {
         //
+        echo "hello";
         $sites = Site::all()->sortBy('nom');
         return view('site.index')->with([
             'sites' => $sites,
@@ -116,5 +117,21 @@ class SiteController extends Controller
     {
         //Excel::import(new SiteImport, $request->file('file')->store('temp'));
         return back();
+    }
+
+    public function retriveDistrict($id) {
+       
+
+        $districts = District::where('numRegion', $id)->get();
+
+        // correction du formatage du JSON
+        $dataSend = [];
+        foreach ($districts as $district) {
+            $t = [];
+            $t['id'] = $district['id'];
+            $t['nom'] = $district['nom'];
+            $dataSend[] = $t;
+        }
+        echo json_encode(['results' => $dataSend]);
     }
 }
