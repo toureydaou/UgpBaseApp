@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Mail;
 
 class PrescripteurController extends Controller
 {
+
+    public function retriveDistrict($id_district){
+
+    }
+
+
     public function showInscription(){
 
         // affichage du formulaire d'ajout d'un utilisateur
@@ -108,10 +114,11 @@ class PrescripteurController extends Controller
 
 
         // Enregistrement de la photo (si fournie)
-
-        if ($request->file != null) {
+        $path = null;
+        if ($request->avatar != null) {
             $image = $request->file('avatar');
-            $request['avatar'] = $image->storeAs('profils', $request->nom . $request->prenom . '.' . $image->extension());
+            $path = $image->storeAs('profils', $request->nom . $request->prenom . '.' . $image->extension());
+            //$request['avatar'] = $image->storeAs('profils', $request->nom . $request->prenom . '.' . $image->extension());
         }
 
         //ddd($request->avatar);
@@ -128,7 +135,7 @@ class PrescripteurController extends Controller
             'telephone' => $request->telephone,
             'dateDebut' => $request->dateDebut,
             'numSite' => $request->numSite,
-            'avatar' => $request->avatar
+            'avatar' => $path
         ]);
 
 
@@ -201,10 +208,7 @@ class PrescripteurController extends Controller
                 'dateFin' => date('d-m-Y')
             ]);
             $prescripteur->save();
-        }
-        
-
-        
+        } 
 
         return redirect()->route('prescripteurs.index');
     }

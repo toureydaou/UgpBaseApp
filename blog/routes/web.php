@@ -61,3 +61,5 @@ Route::post('file-import', [SiteController::class, 'fileImport'])->name('file-im
 Route::get('creation-site', [SiteController::class, 'create'])->name('site.create');
 
 Route::get('liste-des-sites', [SiteController::class, 'index'])->name('site.index');
+
+Route::get('retriveDistrict/{id}', [SiteController::class, 'retriveDistrict'])->name('site.retrive');

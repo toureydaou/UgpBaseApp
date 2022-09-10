@@ -4,6 +4,7 @@
 <div class="container shadow-lg mt-5 col-9 p-0">
     <div class="row m-0">
         <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
             <div class="col-12 text-center mb-2 h4">
                 <p class="mt-3">Ajoutez un site de prescription</p>
             </div>
@@ -14,7 +15,7 @@
                 
                 <div class="mb-5 mt-5 col-sm-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4">
                     <label for="" class="form-label">Région</label>
-                    <select class="form-select" name="region" id="">
+                    <select class="form-select" name="region" id="regions" onchange='retriveDistrict(this)'>
                         @foreach ($regions as $region)
                             <option value={{$region->id}}>{{$region->nom}}</option>
                         @endforeach
@@ -22,11 +23,9 @@
                 </div>
 
                 <div class="mb-5 mt-5 col-sm-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                    <label for="" class="form-label">District</label>
-                    <select class="form-select" name="numDistrict" id="">
-                        @foreach ($districts as $district)
-                            <option value={{$district->id}}>{{$district->nom}}</option>
-                        @endforeach
+                    <label for="numDistrict" class="form-label">District</label>
+                    <select class="form-select" id="districts" name="numDistrict">
+                        
                     </select>
                 </div>
                 <div class="mb-5 mt-5 col-sm-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4">
