@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'email' => 'john@gmail.com',
-            'profil' => 'Prescription',
+            'profil' => 'Prescripteur',
             'password' => Hash::make('12345678'),
         ]);
     }

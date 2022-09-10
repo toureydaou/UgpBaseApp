@@ -28,9 +28,7 @@ function retriveDistrict(elt) {
           var option = document.createElement('option')
           option.value = results["results"][i].id
           option.innerHTML = results["results"][i].nom
-          comboBoxDistrcits.appendChild(option)
-          i++
-          
+          comboBoxDistrcits.appendChild(option)  
         }
         
         
