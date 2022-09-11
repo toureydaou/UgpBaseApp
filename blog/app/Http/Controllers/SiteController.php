@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Site;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel as Excel;
 use App\Imports\SiteImport;
 use App\Models\District;
 use App\Models\Region;
@@ -19,7 +18,6 @@ class SiteController extends Controller
     public function index()
     {
         //
-        echo "hello";
         $sites = Site::all()->sortBy('nom');
         return view('site.index')->with([
             'sites' => $sites,
@@ -105,19 +103,6 @@ class SiteController extends Controller
         //
     }
 
-    public function fileImportExport()
-    {
-       return view('file-import');
-    }
-   
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function fileImport(Request $request) 
-    {
-        //Excel::import(new SiteImport, $request->file('file')->store('temp'));
-        return back();
-    }
 
     public function retriveDistrict($id) {
        
