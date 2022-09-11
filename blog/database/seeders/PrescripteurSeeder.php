@@ -17,11 +17,11 @@ class PrescripteurSeeder extends Seeder
         //
 
         Prescripteur::create([
-            'nom' => 'KANGA',
-            'prenom' => 'Claude',
-            'sexe' => 'Mr',
-            'adresse' => 'Sokodé',
-            'telephone' => '90664587',
+            'nom' => 'COUBADJA',
+            'prenom' => 'Mayi-mouna',
+            'sexe' => 'Mme',
+            'adresse' => 'Avedji',
+            'telephone' => '90110754',
             'email' => 'admin@gmail.com',
             'dateDebut' => '24/08/2022',
             'numSite' => 1,
@@ -30,18 +30,5 @@ class PrescripteurSeeder extends Seeder
             'numUser' => 1
         ]);
 
-        Prescripteur::create([
-            'nom' => 'JHON',
-            'prenom' => 'Rachid',
-            'sexe' => 'Mr',
-            'adresse' => 'Sokodé',
-            'telephone' => '90258471',
-            'email' => 'john@gmail.com',
-            'dateDebut' => '24/08/2022',
-            'numSite' => 2,
-            'actif' => true,
-            'avatar' => 'profils/malikpernon.png',
-            'numUser' => 2
-        ]);
     }
 }

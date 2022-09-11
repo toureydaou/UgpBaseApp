@@ -9,7 +9,7 @@ use Ramsey\Uuid\Type\Integer;
 
     if (!function_exists("generateString")) {
         function generateString ($len_of_gen_str) {
-            $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+            $chars = "ABCD41021EFGHIJKL1234MNOPQRSTUVWXYZ056abcdefghi4524jklmnopq789rstuv014wxyz";
             $var_size = strlen($chars);
             $random_str="";
             for( $x = 0; $x < $len_of_gen_str; $x++ ) {  
