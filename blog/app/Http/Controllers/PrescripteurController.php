@@ -22,8 +22,9 @@ class PrescripteurController extends Controller
     public function showInscription(){
 
         // affichage du formulaire d'ajout d'un utilisateur
-
-        return view('prescripteurs.inscription');
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
+        
+        return view('prescripteurs.inscription')->with('user', $user);
     }
 
     public function inscription(Request $request){
