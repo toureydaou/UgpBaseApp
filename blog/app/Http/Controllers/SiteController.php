@@ -6,7 +6,11 @@ use App\Models\Site;
 use Illuminate\Http\Request;
 use App\Imports\SiteImport;
 use App\Models\District;
+use App\Models\Prescripteur;
 use App\Models\Region;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Type\Integer;
 
 class SiteController extends Controller
 {
@@ -18,9 +22,12 @@ class SiteController extends Controller
     public function index()
     {
         //
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
         $sites = Site::all()->sortBy('nom');
+
         return view('site.index')->with([
             'sites' => $sites,
+            'user' => $user,
         ]);
     }
 
@@ -32,12 +39,13 @@ class SiteController extends Controller
     public function create()
     {
         //
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
         $regions=Region::all()->sortBy('nom');
-        $districts=District::all()->sortBy('nom');
+        
 
         return view('site.create')->with([
             'regions' => $regions->sortBy('nom'),
-            'districts' => $districts->sortBy('nom')
+            'user' => $user,
         ]);
     }
 
@@ -50,9 +58,11 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         //
+        $id = DB::select('select max(id) as max from sites');
         Site::create([
+            'id' => $id[0]->max +1,
             'nom' => $request->nom,
-            'numDistrict' => $request->numDistrict
+            'numDistrict' => intval($request->numDistrict)
         ]);
 
         return redirect()->route('site.create')->with('success', 'Site créé avec succès !');

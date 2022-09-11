@@ -69,9 +69,10 @@ class PrescripteurController extends Controller
      */
     public function index()
     {
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
         $prescripteurs = Prescripteur::all();
         
-        return view('prescripteurs.index')->with(['prescripteurs' => $prescripteurs]);
+        return view('prescripteurs.index')->with(['prescripteurs' => $prescripteurs, 'user' => $user]);
     }
 
     /**
@@ -83,6 +84,7 @@ class PrescripteurController extends Controller
     {
         $sites = Site::all();
         $prescripteur = Prescripteur::where('numUser', Auth::user()->id)->first();
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
         
         
         
@@ -90,7 +92,8 @@ class PrescripteurController extends Controller
         return view('prescripteurs.create')
                 ->with([
                         'sites' => $sites->sortBy('nom'),
-                        'prescripteur' => $prescripteur
+                        'prescripteur' => $prescripteur,
+                        'user' => $user,
                     ]);
     }
 
@@ -160,7 +163,8 @@ class PrescripteurController extends Controller
     public function show(Prescripteur $prescripteur)
     {
         //
-        return view('prescripteurs.show')->with('prescripteur', $prescripteur);
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
+        return view('prescripteurs.show')->with(['prescripteur' => $prescripteur, 'user' => $user]);
     }
 
     /**

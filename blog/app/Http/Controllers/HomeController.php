@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prescripteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {   
+        $user = Prescripteur::where('email', Auth::user()->email)->first();
+
+        
+        
         $nbreTotal = nbrePrescripteurs();
         $nbreActifs = nbrePrescripteursActifs();
         $nbreInactifs = nbrePrescripteursInactifs();
@@ -30,7 +36,8 @@ class HomeController extends Controller
         return view('home')->with([
             'nbreTotal' => $nbreTotal,
             'nbreActifs' => $nbreActifs,
-            'nbreInactifs' => $nbreInactifs
+            'nbreInactifs' => $nbreInactifs,
+            'user' => $user
         ]);
     }
 }

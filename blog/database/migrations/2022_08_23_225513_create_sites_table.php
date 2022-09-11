@@ -12,12 +12,13 @@ class CreateSitesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
         Schema::create('sites', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('nom');
             $table->integer('numDistrict');
             $table->foreign('numDistrict')->references('id')->on('districts')->onDelete('cascade')->onUpdate('cascade');
+            $table->primary('id');
             $table->softDeletes();
             $table->timestamps();
         });
