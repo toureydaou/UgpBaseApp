@@ -24,7 +24,6 @@ class PrescripteurSeeder extends Seeder
             'telephone' => '90664587',
             'email' => 'admin@gmail.com',
             'dateDebut' => '24/08/2022',
-            'dateFin' => '30/11/2023',
             'numSite' => 1,
             'actif' => true,
             'avatar' => 'profils/malikpernon.png',
