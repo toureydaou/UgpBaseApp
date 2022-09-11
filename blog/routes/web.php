@@ -25,7 +25,7 @@ Route::get('/', function () {
     if (Auth::guest()) {
         return view('auth.login');
     } else {
-        return view('home');
+        return redirect()->route('home');
     }
 });
 
@@ -55,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('creation-site', [SiteController::class, 'create'])->name('site.create');
+
+    Route::post('creation-site', [SiteController::class, 'store'])->name('site.store');
 
     Route::get('liste-des-sites', [SiteController::class, 'index'])->name('site.index');
 

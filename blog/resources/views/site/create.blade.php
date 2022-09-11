@@ -3,7 +3,7 @@
 @section('content')
 <div class="container shadow-lg mt-5 col-9 p-0">
     <div class="row m-0">
-        <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('site.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="col-12 text-center mb-2 h4">
                 <p class="mt-3">Ajoutez un site de prescription</p>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="mb-5 mt-5 col-sm-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4">
                     <label for="" class="form-label">Nouveau site</label>
-                    <input type="text" class="form-control" name="nomSite" id="">
+                    <input type="text" class="form-control" name="nom" id="">
                 </div>
             </div>
             <div class="row m-0 justify-content-center p-3">

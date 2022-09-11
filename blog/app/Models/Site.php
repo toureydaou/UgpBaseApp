@@ -10,7 +10,8 @@ class Site extends Model
     use HasFactory;
 
     protected $primaryKey = 'id';
-    protected $fillable = ['nom', 'numDistrict'];
+    protected $fillable = ['id', 'nom', 'numDistrict'];
+    
 
     public function district() {
         return $this->belongsTo(District::class, 'numDistrict');

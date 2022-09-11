@@ -38,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     @auth
-                    @if(Auth::user()->profil === 'Admin')
+                    @if(Auth::user()->profil === 'Admin' && $user->actif != false)
                     <ul class="navbar-nav ms-5">
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -83,7 +83,7 @@
 
 
                     @auth
-                    @if(Auth::user()->profil === 'Prescripteur' || Auth::user()->profil === 'Admin')
+                    @if((Auth::user()->profil === 'Prescripteur' || Auth::user()->profil === 'Admin') && $user->actif != false)
                     <ul class="navbar-nav ms-5">
                         <li class="nav-item">
                             <a id="navbarDropdown" class="nav-link" href="{{ route('creationPrescripteur')}}">
